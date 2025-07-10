@@ -1,0 +1,20 @@
+# Use Docker Compose version 3.8 for the latest features and compatibility
+version: '3.8'
+
+services:
+  # Backend service (Node.js/Express)
+  backend:
+    # Specify the build context — the folder where Dockerfile and code are located
+    build:
+      context: /backend # Adjust this if your backend is in a different location
+    ports:
+      - "5000:5000"  # Expose backend on host port 5000 → container port 5000
+    restart: always  # Automatically restart the container if it crashes
+
+  # Frontend service (React + Nginx)
+  frontend:
+    build:
+      context: /frontend # Location of frontend Dockerfile and source code
+    ports:
+      - "3000:80"  # Host port 3000 maps to container's Nginx port 80
+    restart: always  # Ensure frontend restarts on crash
